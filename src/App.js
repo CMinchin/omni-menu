@@ -2,23 +2,70 @@ import logo from './logo.svg';
 import './App.css';
 
 function App() {
+  const title = 'Omni Menu';
+  useEffect(() => {
+    document.title = title;
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>{/*
+      <home webpage>
+        <title/>
+        <brief desc/>
+        <login panel>
+          <user>
+            <email/>
+            <password/>
+            <login button/>
+            <skip/view anon button/>
+          </user>
+          <restaurant>
+            <email/>
+            <password/>
+            <login button/>
+          </restaurant>
+        </login panel>
+      </home webpage>
+
+      <User page>
+        <filters>
+          <black/whitelist of ingredients>
+            <tick box/>
+            <ingredient name/>
+          </black/whitelist of ingredients>
+        </filters>
+        <search>
+          <search box/>
+          <search result> click anywhere on result to direct to menu item page
+            <Item full name/>
+            <Item desc/>
+            <item ingredients/>
+            <item restaurant/>
+          </search result>
+        </search>
+      <User page>
+      
+      <Restaurant page>
+        <restaurant info>
+          <name/>
+          <desc/>
+          <address/contact info/>
+          <edit button/>
+        <restaurant info>
+        <menu>
+          <menu items>
+            <Item full name/>
+            <Item desc/>
+            <item ingredients/>
+            <viewership stats>
+              <?>*n
+            </viewership stats>
+            <edit button/>
+          </menu items>
+          <edit button/>
+        </menu>
+      <Restaurant page>
+      
+     */}</>
   );
 }
 
