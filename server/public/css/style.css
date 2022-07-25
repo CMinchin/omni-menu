@@ -1,0 +1,55 @@
+.title {
+    color: rgb(160,102,204);
+    background-color: rgb(143,199,237);
+    text-align: center;
+    font-family: 'Bebas Neue', cursive;
+    padding: 100px; 
+}
+
+h1 {
+    font-size: 100px;
+}
+
+#email-login {
+    font-size: 35px;
+    color: rgb(24,54,178);
+    font-weight: bold;
+    text-align: center;
+}
+#password-login {
+    font-size: 35px;
+    color: rgb(24,54,178);
+    font-weight: bold;
+    text-align: center;
+}
+
+#signup-title {
+    font-size: 50px;
+    color: rgb(24,54,178);
+    font-weight: bold;
+    text-align: center;
+}
+
+#email-signup {
+    font-size: 35px;
+    color: rgb(24,54,178);
+    font-weight: bold;
+    text-align: center;
+}
+
+#password-signup {
+    font-size: 35px;
+    color: rgb(24,54,178);
+    font-weight: bold;
+    text-align: center;
+}
+
+.signup {
+    background-color: #FFF8E8;
+    padding: 75px; 
+}
+
+#login {
+    background-color: #FFF8E8;
+    padding: 75px; 
+}

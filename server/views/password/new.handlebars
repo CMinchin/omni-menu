@@ -1,0 +1,193 @@
+<form id="new">
+
+  <div class="form-group row">
+    <label for="Name" class="col-sm-2 col-form-label">Account Name</label>
+    <div class="col-sm-10">
+      <input
+        type="text"
+        class="form-control"
+        id="name"
+        name="name"
+        placeholder="Name"
+        
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="User-name" class="col-sm-2 col-form-label">Username</label>
+    <div class="col-sm-10">
+      <input
+        type="email"
+        class="form-control"
+        id="username"
+        name="username"
+        placeholder="Username"
+        
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+
+   
+
+    <label for="password" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input
+        type="text"
+        class="form-control"
+        id="password"
+        name="password"
+        placeholder="Password"
+      />
+      <label for="input-length">Password Length</label>
+
+      <div class="d-block">
+        <input type="range" class="input-password-criteria"  id="input-length" min="8" max="128"  />
+
+        <span id="span-length-display"></span>
+
+      </div>
+
+      <div>
+        <input class="input-password-criteria" type="checkbox" id="input-lowercase" checked />
+        <label for="input-lowercase">Lowercase Letters</label>
+
+        <div>
+          <input class="input-password-criteria" type="checkbox" id="input-Uppercase" />
+          <label for="input-Uppercase">Uppercase Letters</label>
+        </div>
+
+        <div>
+          <input class="input-password-criteria" type="checkbox" id="input-number" />
+          <label for="input-number">Numbers</label>
+        </div>
+
+        <input class="input-password-criteria" type="checkbox" id="input-symbol" />
+        <label for="input-symbol">Symbols</label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="web-address" class="col-sm-2 col-form-label">Web Address</label>
+    <div class="col-sm-10">
+      <input
+        type="text"
+        class="form-control"
+        id="website"
+        name="website"
+        placeholder="Web address"
+      />
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <div class="col-sm-10 offset-sm-2">
+      <button id="submit" class="btn btn-primary">Add</button>
+    </div>
+  </div>
+</form>
+
+
+<script>
+  const inputPasswordLength = document. getElementById ("input-length");
+const spanPasswordLength = document. getElementById ("span-length-display");
+const inputLowerCase = document. getElementById ("input-lowercase");
+const inputUpperCase = document. getElementById ("input-Uppercase");
+const inputNumber = document. getElementById ("input-number");
+const inputSymbol = document. getElementById ("input-symbol");
+const inputPassword = document.getElementById('password');
+setPasswordLengthSpan();
+
+function setPasswordLengthSpan(){
+  const passwordLength = inputPasswordLength.value;
+  spanPasswordLength.textContent = passwordLength;
+}
+
+inputPasswordLength.addEventListener("input", function(event){
+  setPasswordLengthSpan()
+  
+  }); 
+const inputs = document.querySelectorAll('.input-password-criteria');
+
+
+function generatePassword(){
+  const lowercaseSet = "abcdefghijklmnopqrstuvwxyz";
+  const uppercaseSet = "ABCDEFGHIJKLMOPQRSTUVWXYZ";
+  const numberSet = "1234567890"
+  const symbolsSet = "!@#$%&*+?:"
+
+const passwordLength = Number(inputPasswordLength.value);
+  console. log(passwordLength);
+
+
+let charset = ""
+
+  // Will asl if i want to use 
+ 
+  
+  // lowercase
+const wantsLowercase = inputLowerCase.checked;
+ // uppercase
+const wantsUpperCase = inputUpperCase.checked;
+ // numners
+const wantsNumber = inputNumber.checked;
+// Symboll
+const wantsSymbol = inputSymbol.checked;
+
+
+
+if (!wantsLowercase && !wantsUpperCase && !wantsNumber && !wantsSymbol)
+//alert("Please Select at least one box");
+
+ return;
+
+ if (wantsLowercase){
+   charset = charset + lowercaseSet
+ }
+ if (wantsUpperCase){
+  charset = charset + uppercaseSet
+}
+if (wantsNumber){
+  charset = charset + numberSet
+}
+if (wantsSymbol){
+  charset = charset + symbolsSet
+}
+
+// How to generate a password
+
+// Set accumalator
+
+let password = ""
+
+
+for (let index = 0; index < passwordLength; index++) {
+ 
+
+const randomIndex = Math.floor(Math.random() * charset.length) 
+
+const randomChar = charset[randomIndex];
+password = password + randomChar;
+
+} 
+
+return password;
+}
+
+
+
+console.log(inputs);
+inputs.forEach(input => {
+  input.addEventListener('change', () => {
+    // generate password
+    const password = generatePassword();
+    inputPassword.value = password;
+
+
+  })
+})
+
+</script>
