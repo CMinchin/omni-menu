@@ -1,10 +1,15 @@
 {
   "name": "omni-menu",
   "version": "1.0.0",
-  "description": "![lisence: MIT](https://img.shields.io/github/license/TheEpicHamster/omni-menu)",
+  "description": "A MERN Stack Single-Page Application designed to use react to allow users to browse a range of restaurants' menus simaltaneously with user focussed design allowing customers to search in an inovative new way. Customers can search for food by the food itself and its contents rather than the restaurants themselves because after all we buy food and not restaurants. Users can also search for food based on their dietary requirements allowing users with dangerous allergies to take the guess work out of ordering out. Restaurant owners can deploy their menus with ingredients to the website to help expand their customer base and reduce returns based on dietary requirements.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server/server.js --ignore client",
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
   },
   "repository": {
     "type": "git",
