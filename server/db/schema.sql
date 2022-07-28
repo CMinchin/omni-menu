@@ -1,2 +1,0 @@
-DROP DATABASE IF EXISTS password_db;
-CREATE DATABASE password_db;

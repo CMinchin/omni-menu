@@ -1,13 +1,5 @@
-const User = require('./User');
-const Password = require('./Password');
+const Student = require('./User');
+const Course = require('./Item');
+const Assignment = require('./Tag');
 
-User.hasMany(Password, {
-  foreignKey: 'user_id',
-  onDelete: 'CASCADE'
-});
-
-Password.belongsTo(User, {
-  foreignKey: 'user_id'
-});
-
-module.exports = { User, Password };
+module.exports = { Student, Course, Assignment };

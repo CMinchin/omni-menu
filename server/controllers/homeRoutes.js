@@ -4,8 +4,12 @@ const { Password } = require('../models');
 const withAuth = require('../utils/auth');
 
 router.get('/', async (req, res) => {
-  
-  if(req.session.logged_in){
+  const loggedIn = false;
+  if (req.session) {
+    console.log(router.session);
+    loggedIn = req.session.logged_in;
+  }
+  if(loggedIn){
     res.redirect('/password');
   }else{
     res.redirect('/login');
@@ -14,7 +18,7 @@ router.get('/', async (req, res) => {
 
 
 
-router.get('/password', withAuth, async (req, res) =>{
+router.get('/password', async (req, res) =>{
 
   // get all the current logged in user password
   const passwords = await Password.findAll({
@@ -33,14 +37,14 @@ router.get('/password', withAuth, async (req, res) =>{
 
   })
 });
-router.get('/password/new', withAuth, async (req, res) => {
+router.get('/password/new', async (req, res) => {
   res.render('password/new', {
     logged_in: req.session.logged_in,
 
   })
 });
 
-router.get('/password/delete/:id', withAuth, async (req, res) => {
+router.get('/password/delete/:id', async (req, res) => {
 
   // find and delete password by id
   const deleted = await Password.destroy({
@@ -50,9 +54,7 @@ router.get('/password/delete/:id', withAuth, async (req, res) => {
   });
 
   res.redirect('/password');
-
-
-})
+});
 
 router.post('/password/edit/:id', async (req, res) =>{
   // take in user input
@@ -62,18 +64,18 @@ router.post('/password/edit/:id', async (req, res) =>{
     password:req.body.password,
     website:req.body.website,
     user_id: req.session.user_id,
-  }
+  };
   
   // update password record in db
   const password = await Password.findByPk(req.params.id);
 
 
-  await password.update(payload)
+  await password.update(payload);
 
   // redirect user to password index
 
   res.redirect('/password');
-})
+});
 
 router.get('/password/edit/:id', async (req, res) => {
   // get the password by id
@@ -83,10 +85,10 @@ router.get('/password/edit/:id', async (req, res) => {
   res.render('password/edit', {
     password: password.get({plain: true}),
     logged_in: req.session.logged_in
-  })
-})
+  });
+});
 
-router.post('/password/new', withAuth, async (req, res) => {
+router.post('/password/new', async (req, res) => {
 
 
   // read the req data
@@ -101,11 +103,8 @@ router.post('/password/new', withAuth, async (req, res) => {
   // save the password to db
   const created = await Password.create(payload);
 
-
   // redirect the user to password/index
   res.redirect('/password');
-
-
 });
 
 module.exports = router;

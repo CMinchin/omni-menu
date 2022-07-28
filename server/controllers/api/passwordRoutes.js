@@ -1,8 +1,7 @@
 const router = require('express').Router();
 const { Password } = require('../../models');
-const withAuth = require('../../utils/auth');
 
-// router.post('/', withAuth, async (req, res) => {
+// router.post('/', async (req, res) => {
 //   try {
 //     const newProject = await Password.create({
 //       ...req.body,
@@ -15,7 +14,7 @@ const withAuth = require('../../utils/auth');
 //   }
 // });
 
-// router.delete('/:id', withAuth, async (req, res) => {
+// router.delete('/:id', async (req, res) => {
 //   try {
 //     const projectData = await Password.destroy({
 //       where: {
@@ -36,7 +35,7 @@ const withAuth = require('../../utils/auth');
 // });
 
 // retrieve all passwords from acc that you are logged in as
-router.get('', withAuth, async (req, res) => {
+router.get('', async (req, res) => {
   try {
     const passwordsData = await Password.findAll({
       where: {
@@ -59,7 +58,7 @@ router.get('', withAuth, async (req, res) => {
 });
 
 // retrieve specific password from acc you are logged in as 
-router.get('/:id', withAuth, async (req, res) => {
+router.get('/:id', async (req, res) => {
   try {
     const passwordsData = await Password.findAll({
       where: {
@@ -83,7 +82,7 @@ router.get('/:id', withAuth, async (req, res) => {
 });
 
 // add password to database
-router.post('/', withAuth, async (req, res) => {
+router.post('/', async (req, res) => {
   try {
     req.body.user_id = req.session.user_id
     const passwordsData = await Password.create(req.body);
@@ -104,7 +103,7 @@ router.post('/', withAuth, async (req, res) => {
 });
 
 // update password in database
-router.post('/:id', withAuth, async (req, res) => {
+router.post('/:id', async (req, res) => {
   console.log("congrats we got here");
 
 
@@ -138,7 +137,7 @@ router.post('/:id', withAuth, async (req, res) => {
 });
 
 // delete password from database
-router.patch('/:id', withAuth, async (req, res) => {
+router.patch('/:id', async (req, res) => {
   try {
     const passwordsData = await Password.destroy(req.body,{
       where: {
