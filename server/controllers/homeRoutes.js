@@ -1,7 +1,24 @@
 const router = require('express').Router();
+const {User, Item, Tag} = require('../models/index');
 
 const { Password } = require('../models');
-const withAuth = require('../utils/auth');
+
+router.post("/login", async (req, res) => {
+  User.findOne({username: req.body.username})
+    .then((user)=>{
+      if (user) {
+        if (user.password == req.body.password) {
+          res.send("verified");
+          return;
+        }
+      }
+      res.status(401).send("usernameo or password incorrect");
+      console.log(user);
+    }).catch((user)=>{
+      console.log(user);
+    });
+  res.send(req.body);
+});
 
 router.get('/', async (req, res) => {
   const loggedIn = false;
@@ -59,11 +76,11 @@ router.get('/password/delete/:id', async (req, res) => {
 router.post('/password/edit/:id', async (req, res) =>{
   // take in user input
   const payload = {
-    name: req.body.name,
+    name:req.body.name,
     username:req.body.username,
     password:req.body.password,
     website:req.body.website,
-    user_id: req.session.user_id,
+    user_id:req.session.user_id,
   };
   
   // update password record in db
