@@ -1,4 +1,4 @@
-function home() {
+function user() {
     return (
       <>{/*
         <User page>
@@ -22,4 +22,4 @@ function home() {
     );
   }
   
-  export default home;
+  export default user;
