@@ -1,23 +1,37 @@
 import { useState } from "react";
 
-
 function User() {
+    const w = (e) => {
+        let x = states.map((state)=>{
+            state = state.filter(a=>e!=a);
+            return state;
+        });
+        setStates(x)
+    }
+    const u = (e) => {
+        w(e.target.name);
+        console.log(parseInt(e.target.value)+1)
+        states[parseInt(e.target.value)+1].push(e.target.name);
+        setStates(states);
+        console.log(states);
+    }
+
     function Selector(props) { 
         return (
             <div className="superSelector">
                 {props.name}
                 <div className="selector">
-                    <input id={props.name+"x"} type="radio" value="-1" name={props.name} onChange={async (a) => {states[1](! a.target.checked)}}/>
+                    <input id={props.name+"x"} type="radio" value="-1" name={props.name} onChange={u}/>
                     <label htmlFor={props.name+"x"} className="X">✗</label>
-                    <input id={props.name+"s"} type="radio" value="0" name={props.name} checked="checked" onChange={async (a) => {states[1](a.target.checked)}}/>
+                    <input id={props.name+"s"} type="radio" value="0" name={props.name} checked="checked" onChange={u}/>
                     <label htmlFor={props.name+"s"} className="S">/</label>
-                    <input id={props.name+"t"} type="radio" value="1" name={props.name} onChange={async (a) => {states[1](a.target.checked)}}/>
+                    <input id={props.name+"t"} type="radio" value="1" name={props.name} onChange={u}/>
                     <label htmlFor={props.name+"t"} className="T">✓</label>
                 </div>
             </div>
         );
     }
-    const states = useState(true);
+    var [states, setStates] = useState([[],[],[]]);
     const [query, setQuery] = useState("");
     const results = [
         {
