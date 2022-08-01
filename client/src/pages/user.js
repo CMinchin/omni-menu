@@ -8,16 +8,17 @@ function User() {
                 {props.name}
                 <div className="selector">
                     <input id={props.name+"x"} type="radio" value="-1" name={props.name} onChange={async (a) => {states[1](! a.target.checked)}}/>
-                    <label for={props.name+"x"} className="X">✗</label>
+                    <label htmlFor={props.name+"x"} className="X">✗</label>
                     <input id={props.name+"s"} type="radio" value="0" name={props.name} checked="checked" onChange={async (a) => {states[1](a.target.checked)}}/>
-                    <label for={props.name+"s"} className="S">/</label>
+                    <label htmlFor={props.name+"s"} className="S">/</label>
                     <input id={props.name+"t"} type="radio" value="1" name={props.name} onChange={async (a) => {states[1](a.target.checked)}}/>
-                    <label for={props.name+"t"} className="T">✓</label>
+                    <label htmlFor={props.name+"t"} className="T">✓</label>
                 </div>
             </div>
         );
     }
     const states = useState(true);
+    const [query, setQuery] = useState("");
     const results = [
         {
             name: "Roadhouse Whopper®",
@@ -36,7 +37,7 @@ function User() {
             ]
         },
         {
-            name: "Roadhouse Whopper®",
+            name: "Roadhouse Whopper® 2: Electric Boogaloo",
             desc: "100% flame-grilled Aussie beef topped with melted cheese, double premium eye bacon, special sauce, pickles, onion, lettuce and tomato on a toasted sesame seed bun.",
             ingredients: [
                 "beef",
@@ -107,7 +108,7 @@ function User() {
         */}
         <div className="search">
             <h3>Search</h3>
-            <input id="search"/>
+            <input id="search" onChange={e=>{setQuery(e.target.value)}}/>
         </div>
         <div className="below">
             <ul className="filters">
@@ -125,7 +126,7 @@ function User() {
                 ))}
             </ul>
             <div className="results">
-                {results.filter(e=>(!(e.ingredients.includes("beef"))||states[0])).map(result => (
+                {results.filter(e=>((!(!e.ingredients.includes("beef"))||states[0])&&(e.name.toLowerCase().includes(query.toLowerCase())||!query))).map(result => (
                     <>
                         <div className="result">
                             <p className="item-name">
