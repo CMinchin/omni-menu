@@ -65,12 +65,12 @@ h1 {
     justify-content: space-between;
 }
 
-.buttons > button {
+.buttons > a {
     font-size: 20px;
     background-color: #37373D;
     border-radius: 0px;
-    padding: 4px;
-    width: 110px;
+    padding: 4px !important;
+    width: 110px !important;
 }
 
 .login-box > h3 {
@@ -95,10 +95,34 @@ h1 {
     font-size: 20px;
     background-color: #37373D;
     border-radius: 0px;
-    padding: 4px;
-    width: 100%;
-    margin-top: 20px;
+    padding: 4px !important;
+    width: 100% !important;
+    margin-top: 20px !important;
 }
+
+a.button1{
+    display:inline-block;
+    border:0.1em solid #FFFFFF;
+    margin:0 0.3em 0.3em 0;
+    border-radius:0.12em;
+    box-sizing: border-box;
+    text-decoration:none;
+    font-family:'Roboto',sans-serif;
+    font-weight:300;
+    color:#FFFFFF;
+    text-align:center;
+    transition: all 0.2s;
+    }
+    a.button1:hover{
+    color:#000000;
+    background-color:#FFFFFF;
+    }
+    @media all and (max-width:30em){
+    a.button1{
+    display:block;
+    margin:0.4em auto;
+    }
+    }
 
 .menu {
     background-color: #252526;
@@ -157,7 +181,24 @@ ul > li > ul {
 }
 
 .results {
+    width: 75%;
     height: 100%;
     overflow-y: auto;
     overflow-x: hidden;
+}
+
+.result {
+    border: 1px solid #202124;
+    padding: 5px;
+    background-color: #252526;
+    margin: 0px 5px 5px 5px;
+}
+
+.item-ingredients > div {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.item-ingredients > div > p {
+    padding: 0px 10px;
 }

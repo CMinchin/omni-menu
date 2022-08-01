@@ -15,6 +15,41 @@ function Selector(props) {
 }
 
 function user() {
+    const results = [
+        {
+            name: "Roadhouse Whopper®",
+            desc: "100% flame-grilled Aussie beef topped with melted cheese, double premium eye bacon, special sauce, pickles, onion, lettuce and tomato on a toasted sesame seed bun.",
+            ingredients: [
+                "beef",
+                "cheese",
+                "bacon",
+                "pickles",
+                "onion",
+                "lettuce",
+                "tomato",
+                "gluten",
+                "sesame",
+                "yeast"
+            ]
+        },
+        {
+            name: "Roadhouse Whopper®",
+            desc: "100% flame-grilled Aussie beef topped with melted cheese, double premium eye bacon, special sauce, pickles, onion, lettuce and tomato on a toasted sesame seed bun.",
+            ingredients: [
+                "beef",
+                "cheese",
+                "bacon",
+                "pickles",
+                "onion",
+                "lettuce",
+                "tomato",
+                "gluten",
+                "sesame",
+                "yeast"
+            ]
+        }
+    ]
+
     const filters = {
         Meats: [
             "Beef",
@@ -73,9 +108,26 @@ function user() {
                 ))}
             </ul>
             <div className="results">
+                {results.map(result => (
+                    <div className="result">
+                        <p className="item-name">
+                        {result.name}
+                    </p>
+                    <p className="item-desc">
+                        {result.desc}
+                    </p>
+                    <div className="item-ingredients">
+                        <h4>Contains:</h4>
+                        <div>
+                            {result.ingredients.map(ingredient=>(
+                                <p>{ingredient}</p>
+                            ))}
+                        </div>
+                    </div>
+                    </div>
+                ))}
             </div>
         </div>
-        
     </>
     );
 }

@@ -1,4 +1,7 @@
-function home() {
+import { useState } from "react";
+
+function Home() {
+  const [login, setLogin] = useState("User");
     return (
       <>{/*
         <home webpage>
@@ -23,15 +26,15 @@ function home() {
        <h3 className="home-desc">A better way to shop. For users, by users.</h3>
        <div className="login-box">
         <div className="buttons">
-          <button>
+          <a className="button1" onClick={()=>setLogin("User")}>
             User
-          </button>
-          <button>
+          </a>
+          <a className="button1" onClick={()=>setLogin("Restaurant")}>
             Restaurant
-          </button>
+          </a>
         </div>
         <h3>
-          Login
+          Login - <span id="loginSpan">{login}</span>
         </h3>
         <h4>
           Email
@@ -42,19 +45,19 @@ function home() {
         </h4>
         <input id="email-input"/>
         <div className="login buttons">
-          <button>
+          <a className="button1">
             Login
-          </button>
-          <button>
+          </a>
+          <a className="button1">
             Sign up
-          </button>
+          </a>
         </div>
-        <button className="button">
+        <a className="button button1" href="/user/">
           Continue without logging in
-        </button>
+        </a>
        </div>
        </>
     );
   }
   
-  export default home;
+  export default Home;

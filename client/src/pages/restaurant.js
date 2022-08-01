@@ -54,7 +54,7 @@ function restaurant() {
                     <p className="item-desc">
                         {item.desc}
                     </p>
-                    <div className="item-ingrediens">
+                    <div className="item-ingredients">
                         <h4>Contains:</h4>
                         <ul>
                             {item.ingredients.map(ingredient=>(
