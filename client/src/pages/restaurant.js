@@ -1,4 +1,4 @@
-function restaurant() {
+function Restaurant() {
     const info = {
         name: "Hungry Jack's",
         desc: "Hungry Jack's makes it better",
@@ -68,4 +68,4 @@ function restaurant() {
     );
   }
   
-  export default restaurant;
+  export default Restaurant;
