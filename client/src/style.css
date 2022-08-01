@@ -2,6 +2,10 @@
     color: #F0F0F0;
 }
 
+body {
+    height: 100vh;
+}
+
 nav {
     background-color: #3C3C3C;
     display: flex;
@@ -14,7 +18,7 @@ nav {
 
 nav > h2 {
     justify-self: left;
-    padding-right: 20px;
+    padding: 0px 20px;
 }
 
 nav > a {
@@ -100,4 +104,60 @@ h1 {
     background-color: #252526;
     padding: 10px;
     padding-left: 20px;
+}
+
+.search {
+    display: flex;
+}
+
+.search > input {
+    width: 100%;
+    margin: 5px;
+    background-color: #3C3C3C;
+    border-radius: 5px;
+}
+
+.below {
+    height: calc(100vh - 121px);
+    display: flex;
+}
+
+.filters {
+    width: 25%;
+    padding: 10px;
+    padding-left: 30px;
+    background-color: #252526;
+}
+
+.T {
+    color: #9f0;
+}
+
+.S {
+    color: #F5F543;
+}
+
+.X {
+    color: red;
+}
+
+.selector {
+    display: inline;
+    padding-left: 30px;
+}
+
+.superSelector {
+    display: flex;
+    justify-content: space-between;
+}
+
+ul > li > ul {
+    background-color: #3C3C3C;
+    margin-top: 5px;
+}
+
+.results {
+    height: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
