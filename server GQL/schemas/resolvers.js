@@ -27,8 +27,7 @@ const resolvers = {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
       const restaurant = await Restaurant.create({
-        thoughtText,
-        thoughtAuthor: user.username,
+        name: username
       });
       
       await User.findOneAndUpdate(
