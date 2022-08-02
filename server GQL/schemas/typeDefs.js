@@ -19,6 +19,12 @@ const typeDefs = gql`
     name: String!
     dishes: [Item]
   }
+
+  type Query {
+    item: [Item]
+    ingredient: [Ingredient]
+    restaurant: [Restaurant]
+  }
 `
 `
   type Mutation {

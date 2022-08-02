@@ -1,37 +1,46 @@
 import { useState } from "react";
 
 function User() {
-    const w = (e) => {
-        let x = states.map((state)=>{
-            state = state.filter(a=>e!=a);
-            return state;
-        });
-        setStates(x)
-    }
-    const u = (e) => {
-        w(e.target.name);
-        console.log(parseInt(e.target.value)+1)
-        states[parseInt(e.target.value)+1].push(e.target.name);
-        setStates(states);
+    let selectors = [];
+
+    const f = (e) => {
         console.log(states);
+        Object.keys(states).forEach(ingredient => {
+            if((states[ingredient]==0&&e.ingredients.includes(ingredient))||(states[ingredient]==2&&!e.ingredients.includes(ingredient))) {
+                console.log(e.name,ingredient,false)
+                return false
+            }
+        });
+        console.log(e.name,true)
+        return true
+    }
+
+    const u = (e) => {
+        let newStates = structuredClone(states);
+        newStates[e.target.name] = e.target.value
+        console.log(e.target.name,e.target.value);
+        setStates(newStates);
     }
 
     function Selector(props) { 
-        return (
-            <div className="superSelector">
-                {props.name}
-                <div className="selector">
-                    <input id={props.name+"x"} type="radio" value="-1" name={props.name} onChange={u}/>
-                    <label htmlFor={props.name+"x"} className="X">✗</label>
-                    <input id={props.name+"s"} type="radio" value="0" name={props.name} checked="checked" onChange={u}/>
-                    <label htmlFor={props.name+"s"} className="S">/</label>
-                    <input id={props.name+"t"} type="radio" value="1" name={props.name} onChange={u}/>
-                    <label htmlFor={props.name+"t"} className="T">✓</label>
-                </div>
-            </div>
-        );
+        let j =(<div className="selector" onChange={u}>
+            <input id={props.name+"x"} type="radio" value="0" name={props.name} onChange={()=>{}}/>
+            <label htmlFor={props.name+"x"} className="X">✗</label>
+            <input id={props.name+"s"} type="radio" value="1" name={props.name} onChange={()=>{}}/>
+            <label htmlFor={props.name+"s"} className="S">/</label>
+            <input id={props.name+"t"} type="radio" value="2" name={props.name} onChange={()=>{}}/>
+            <label htmlFor={props.name+"t"} className="T">✓</label>
+        </div>)
+        selectors.push(j);
+        let x = (<div className="superSelector">
+            {props.name}
+            {j}
+        </div>)
+        
+        return (x);
     }
-    var [states, setStates] = useState([[],[],[]]);
+    // var states = [useState([]),useState([]),useState([])];
+    var [states, setStates] = useState({});
     const [query, setQuery] = useState("");
     const results = [
         {
@@ -122,7 +131,7 @@ function User() {
         */}
         <div className="search">
             <h3>Search</h3>
-            <input id="search" onChange={e=>{setQuery(e.target.value)}}/>
+            <input id="search" onChange={e=>{setQuery(e.target.value)}} onSelect={e=>{console.log(states)}}/>
         </div>
         <div className="below">
             <ul className="filters">
@@ -140,7 +149,7 @@ function User() {
                 ))}
             </ul>
             <div className="results">
-                {results.filter(e=>((!(!e.ingredients.includes("beef"))||states[0])&&(e.name.toLowerCase().includes(query.toLowerCase())||!query))).map(result => (
+                {results.filter(e=>((f(e))&&(e.name.toLowerCase().includes(query.toLowerCase())||!query))).map(result => (
                     <>
                         <div className="result">
                             <p className="item-name">
