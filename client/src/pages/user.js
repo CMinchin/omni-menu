@@ -1,17 +1,36 @@
 import { useState } from "react";
+import { gql, useQuery } from '@apollo/client';
 
 function User() {
+    const { loading, data } = useQuery(gql`query Item {
+        item {
+          _id
+          name
+          ingredients {
+            _id
+            name
+          }
+          desc
+          rest {
+            _id
+            name
+          }
+        }
+      }`);
+    const items = data?.thoughts || [];
+    // console.log(data, items)
+
     let selectors = [];
 
     const f = (e) => {
-        console.log(states);
+        // console.log(states);
         Object.keys(states).forEach(ingredient => {
             if((states[ingredient]==0&&e.ingredients.includes(ingredient))||(states[ingredient]==2&&!e.ingredients.includes(ingredient))) {
                 console.log(e.name,ingredient,false)
                 return false
             }
         });
-        console.log(e.name,true)
+        // console.log(e.name,true)
         return true
     }
 
