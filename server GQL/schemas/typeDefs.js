@@ -25,13 +25,13 @@ const typeDefs = gql`
     ingredient: [Ingredient]
     restaurant: [Restaurant]
   }
-`
-`
+
   type Mutation {
-    addIngredient(thoughtText: String!, thoughtAuthor: String!): Thought
-    addComment(thoughtId: ID!, commentText: String!): Thought
-    removeThought(thoughtId: ID!): Thought
-    removeComment(thoughtId: ID!, commentId: ID!): Thought
+    addUser(username: String!, email: String!, password: String!): Auth
+    addRestaurantUser(username: String!, email: String!, password: String!): Auth
+    login(username: String, email: String, password: String!): Auth
+    addItem(thoughtText: String!, thoughtAuthor: String!): Thought
+    removeItem(thoughtId: ID!): Item
   }
 `;
 

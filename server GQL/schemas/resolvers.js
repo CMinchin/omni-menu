@@ -38,24 +38,27 @@ const resolvers = {
       
       return { token, user, restaurant };
     },
-    login: async (parent, { email, password }) => {
+    login: async (parent, { username, email, password }) => {
       const user = await User.findOne({ email });
 
       if (!user) {
-        throw new AuthenticationError('No user found with this email address');
+        user = await User.findOne({ username });
+
+        if (!user) {
+          throw new AuthenticationError('Incorrect credentials'); // login via email OR username
+        }
       }
 
       const correctPw = await user.isCorrectPassword(password);
 
       if (!correctPw) {
-        throw new AuthenticationError('Incorrect credentials');
+        throw new AuthenticationError('Incorrect credentials'); // obscure whether the user typed username or password incorrectly for security reasons
       }
 
       const token = signToken(user);
 
       return { token, user };
     },
-
     addItem: async (parent, { restaurantId, item }) => {
       if (User.findOne(context.user._id).restaurant.includes(restaurantId)) {
         throw new AuthenticationError('This is not your restaurant');
@@ -72,17 +75,26 @@ const resolvers = {
         }
       );
     },
-    removeThought: async (parent, { thoughtId }) => {
-      return Thought.findOneAndDelete({ _id: thoughtId });
-    },
-    removeComment: async (parent, { thoughtId, commentId }) => {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
-        { $pull: { comments: { _id: commentId } } },
-        { new: true }
-      );
-    },
-  },
+    removeItem: async (parent, { itemId, restaurantId }) => {
+      if (context.user) {
+        if (User.findOne(context.user._id).restaurant.includes(restaurantId)) {
+          throw new AuthenticationError('This is not your restaurant');
+        }
+        const item = await Item.findOneAndDelete({
+          _id: itemId,
+          restaurantId
+        });
+
+        await Restaurant.findOneAndUpdate(
+          { _id: restaurantId },
+          { $pull: { items: item._id } }
+        );
+
+        return item;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    }
+  }
 };
 
 module.exports = resolvers;
