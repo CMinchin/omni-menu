@@ -23,23 +23,20 @@ const resolvers = {
       const token = signToken(user);
       return { token, user };
     },
-    addRestaurantUser: async (parent, { thoughtText }, context) => {
+    addRestaurantUser: async (parent, { username, email, password }, context) => {
       const user = await User.create({ username, email, password });
       const token = signToken(user);
-      if (context.user) {
-        const thought = await Thought.create({
-          thoughtText,
-          thoughtAuthor: context.user.username,
-        });
-        
-        await User.findOneAndUpdate(
-          { _id: context.user._id },
-          { $addToSet: { thoughts: thought._id } }
-          );
-          
-          return { token, user };
-        }
-      throw new AuthenticationError('You need to be logged in!');
+      const restaurant = await Restaurant.create({
+        thoughtText,
+        thoughtAuthor: user.username,
+      });
+      
+      await User.findOneAndUpdate(
+        { _id: user._id },
+        { $addToSet: { restaurant: restaurant._id } }
+      );
+      
+      return { token, user, restaurant };
     },
     login: async (parent, { email, password }) => {
       const user = await User.findOne({ email });
@@ -59,11 +56,15 @@ const resolvers = {
       return { token, user };
     },
 
-    addComment: async (parent, { thoughtId, commentText }) => {
-      return Thought.findOneAndUpdate(
-        { _id: thoughtId },
+    addItem: async (parent, { restaurantId, item }) => {
+      if (User.findOne(context.user._id).restaurant.includes(restaurantId)) {
+        throw new AuthenticationError('This is not your restaurant');
+      }
+
+      return Restaurant.findOneAndUpdate(
+        { _id: restaurantId },
         {
-          $addToSet: { comments: { commentText } },
+          $addToSet: { items: { commentText } },
         },
         {
           new: true,

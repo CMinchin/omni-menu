@@ -10,6 +10,7 @@ const restaurantSchema = new Schema({
   },
   description: {
     type: String,
+    default: "Your description here",
     minlength: 1,
     maxlength: 280,
     trim: true,

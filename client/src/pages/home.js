@@ -41,9 +41,13 @@ function Home() {
         </h4>
         <input id="email-input"/>
         <h4>
+          Username
+        </h4>
+        <input id="Username-input"/>
+        <h4>
           Password
         </h4>
-        <input id="email-input"/>
+        <input id="password-input" type="password"/>
         <div className="login buttons">
           <a className="button1">
             Login
